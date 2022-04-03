@@ -35,6 +35,7 @@ def matrixFile(filename):
     blank = -1
     checkPos = 1
     lowerbound = 0
+    filename = "test/" + filename
     with open(filename) as f:
         lines = f.readlines()
         for line in lines:
@@ -180,6 +181,7 @@ def search(puzzle, blank, lowerbound):
     dir = { 0: [-1, 0, "UP"], 1: [1, 0, "DOWN"], 2: [0, -1, "LEFT"], 3: [0, 1, "RIGHT"] }
 
     visited = []
+    generated = 0
     currpath = [[puzzle, "-"]]
     livenode = PriorityQueue()
     livenode.put([lowerbound, puzzle, lowerbound, 0, currpath]) # add initial puzzle state
@@ -203,6 +205,7 @@ def search(puzzle, blank, lowerbound):
             print("Elapsed time: " + str(end - start))
             print("Total step: " + str(currdepth))
             print("Visited nodes: " + str(len(visited) - 1))
+            print("Generated nodes: " + str(generated))
             break
 
         # get nodes for all movement directions
@@ -214,3 +217,4 @@ def search(puzzle, blank, lowerbound):
                 costDir = currcost + 1 + addCost # initialize cost
                 path = currpath + [[nodeDir, (dir[i])[2]]] # initialize path and movement
                 livenode.put([costDir, nodeDir, currleft + addCost, currdepth + 1, path])
+                generated += 1

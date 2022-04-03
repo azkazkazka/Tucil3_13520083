@@ -29,5 +29,5 @@ print("\n----------------------------------------------------------\n")
 if (reachability):
     search(puzzle, blank, lowerbound)
 else:
-    print("PUZZLE UNREACHABLE!")
+    print("GOAL STATE UNREACHABLE!")
  
